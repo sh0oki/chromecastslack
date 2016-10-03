@@ -11,5 +11,4 @@ Use your favorite init script to execute the script after restart.
 
 ## Example
 
-![screenshot](examples/screenshot.png "One Look is Worth A Thousand Words")
-
+<img src="https://github.com/sh0oki/chromecastslack/raw/master/examples/screenshot.png" alt="Screenshot" title="One Look is Worth A Thousand Words" width="657" height="98" />
