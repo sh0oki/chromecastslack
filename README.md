@@ -3,7 +3,16 @@ Report your playing songs to slack!
 
 This script will look for active Chromecasts in your LAN, then report the currently played song to a slack channel of your choosing.
 
-## Usage:
+I tested this script with Python 3.5. Other versions (2.7 and up) should work, but haven't been tested.
+
+## Installing
+```
+git clone git@github.com:sh0oki/chromecastslack.git
+cd chromecastslack
+pip3.5 install -r ./requirements.txt
+```
+
+## Usage
 ```
 SLACKBOT_TOKEN=xoxb-my-token python3.5 listener.py
 ```
