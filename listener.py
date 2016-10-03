@@ -2,7 +2,6 @@
 
 from time import sleep
 import logging
-import schedule
 
 import pychromecast
 import bot
