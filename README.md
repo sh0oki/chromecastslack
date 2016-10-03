@@ -9,4 +9,7 @@ SLACKBOT_TOKEN=xoxb-my-token python3.5 listener.py
 ```
 Use your favorite init script to execute the script after restart.
 
+## Example
+
+![screenshot](examples/screenshot.png "One Look is Worth A Thousand Words")
 
