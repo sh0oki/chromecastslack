@@ -19,15 +19,16 @@ class ChromecastListener(object):
         if status.player_state != 'PLAYING':
             logging.debug("[%s] Skipping due to status" % (self._player,))
             return
-
-        if status.media_metadata['songName'] == self._song:
+        
+        song = status.media_metadata.get('songName', status.media_metadata['title'])
+        if song == self._song:
             logging.debug("[%s] Skipping due to same song again (%s)" % (self._player, self._song))
             return
 
-        self._song = status.media_metadata['songName']
+        self._song = song
         logging.info("Posting song %s" % (self._song, ))
         try:
-                self.postSong(status.media_metadata['artist'], status.media_metadata['songName'], status.media_metadata['images'][0]['url'])
+                self.postSong(status.media_metadata['artist'], song, status.media_metadata['images'][0]['url'])
         except Exception as e:
                 logging.exception("Failed to post song")
 
