@@ -5,6 +5,12 @@ This script will look for active Chromecasts in your LAN, then report the curren
 
 I tested this script with Python 3.5. Other versions (3.0 and up) should work, but haven't been tested.
 
+## Setup
+1. Have a working Chromecast in your LAN, playing music from your favorite source (Spotify, Soundcloud, ...).
+1. [Create a bot user](https://my.slack.com/services/new/bot) in your Slack account.
+1. Install *chromecastslack* on any computer in your LAN. 
+1. Use the API token (*xoxb-a-b*) to execute the bot.
+
 ## Installing
 ```
 git clone git@github.com:sh0oki/chromecastslack.git
