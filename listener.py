@@ -37,7 +37,7 @@ class ChromecastListener(object):
         self._bot.sayEx("%s - %s" % (song_name, artist), image, self._player)
 
 def active_devices():
-    return pychromecast.get_chromecasts_as_dict().keys()
+    return pychromecast.get_chromecasts()
 
 class ChromecastManager(object):
     def __init__(self, bot):
@@ -50,9 +50,12 @@ class ChromecastManager(object):
                 continue
             self.register(chromecast)
 
-    def register(self, chromecast):
+    def register(self, cs):
+        chromecast = cs.device.friendly_name
         l = ChromecastListener(chromecast, self.bot)
-        cs = pychromecast.get_chromecast(friendly_name=chromecast)
+        if cs is None:
+            logging.error("[%s] Registration failed" % (chromecast, ))
+            return
         cs.wait()
         mc = cs.media_controller
         mc.register_status_listener(l)

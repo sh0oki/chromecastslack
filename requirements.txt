@@ -1,2 +1,2 @@
-pychromecast>=0.7.4
+pychromecast>=0.8.1
 slackclient
