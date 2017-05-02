@@ -1,6 +1,7 @@
 #!/usr/local/bin/python3.5
 
 from time import sleep
+from multiprocessing import Lock
 import logging
 
 import pychromecast
@@ -13,6 +14,7 @@ class ChromecastListener(object):
         self._song = None
         self._player = player
         self._bot = bot
+        self._lock = Lock()
 
     def new_media_status(self, status):
         logging.debug("[%s] Got new_media_status %s" % (self._player, status.player_state))
@@ -21,11 +23,15 @@ class ChromecastListener(object):
             return
         
         song = status.media_metadata.get('songName', status.media_metadata['title'])
-        if song == self._song:
-            logging.debug("[%s] Skipping due to same song again (%s)" % (self._player, self._song))
-            return
+        self._lock.acquire(True)
+        try:
+            if song == self._song:
+                logging.debug("[%s] Skipping due to same song again (%s)" % (self._player, self._song))
+                return
+            self._song = song
+        finally:
+            self._lock.release()
 
-        self._song = song
         logging.info("Posting song %s" % (self._song, ))
         try:
                 self.postSong(status.media_metadata['artist'], song, status.media_metadata['images'][0]['url'])
