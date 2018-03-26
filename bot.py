@@ -14,10 +14,10 @@ class Bot(object):
         return os.environ['SLACKBOT_TOKEN']
     
     def _channel(self):
-        return os.environ['CHANNEL']
+        return os.environ.get('CHANNEL', 'musicreactions')
 
     def _username(self):
-        return os.environ['USERNAME']
+        return os.environ.get('USERNAME', 'Discobear')
 
     def say(self, message):
         self._client.rtm_send_message(self._channel, message)
