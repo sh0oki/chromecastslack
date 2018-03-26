@@ -20,9 +20,10 @@ pip3.5 install -r ./requirements.txt
 
 ## Usage
 ```
-SLACKBOT_TOKEN=xoxb-my-token python3.5 listener.py
+SLACKBOT_TOKEN=xoxb-my-token CHANNEL=musicreactions USERNAME=Discobear python3.5 listener.py
 ```
 Use your favorite init script to execute the script after restart.
+*CHANNEL* and *USERNAME* variables are optional, their default values are shown above.
 
 ## Example
 

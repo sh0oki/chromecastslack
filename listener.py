@@ -33,10 +33,21 @@ class ChromecastListener(object):
             self._lock.release()
 
         logging.info("Posting song %s" % (self._song, ))
+        artist = "?"
         try:
-                self.postSong(status.media_metadata['artist'], song, status.media_metadata['images'][0]['url'])
+            artist = status.media_metadata['artist']
+        except:
+            logging.exception("Failed to get artist")
+            
+        image = ""
+        try:
+            image = status.media_metadata['images'][0]['url']
+        except:
+            logging.exception("Failed to get image")
+        try:
+            self.postSong(artist, song, image)
         except Exception as e:
-                logging.exception("Failed to post song")
+            logging.exception("Failed to post song")
 
     def postSong(self, artist, song_name, image=None):
         logging.info("[%s]\t%s - %s (%s)" % (self._player, artist, song_name, image))
@@ -52,7 +63,7 @@ class ChromecastManager(object):
 
     def poll(self):
         for chromecast in active_devices():
-            if chromecast in self.active_list:
+            if chromecast.uuid in self.active_list:
                 continue
             self.register(chromecast)
 
@@ -66,7 +77,7 @@ class ChromecastManager(object):
         mc = cs.media_controller
         mc.register_status_listener(l)
         logging.info("[%s] Registered" % (chromecast, ))
-        self.active_list[chromecast] = [l, mc]
+        self.active_list[cs.uuid] = [l, mc]
 
 def main():
     m = ChromecastManager(bot.Bot())
