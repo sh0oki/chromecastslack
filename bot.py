@@ -17,7 +17,7 @@ class Bot(object):
         return os.environ.get('CHANNEL', 'musicreactions')
 
     def _username(self):
-        return os.environ.get('USERNAME', 'Discobear')
+        return os.environ.get('SLACK_USERNAME', 'Discobear')
 
     def say(self, message):
         self._client.rtm_send_message(self._channel, message)

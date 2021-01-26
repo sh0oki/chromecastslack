@@ -54,7 +54,8 @@ class ChromecastListener(object):
         self._bot.sayEx("%s - %s" % (song_name, artist), image, self._player)
 
 def active_devices():
-    return pychromecast.get_chromecasts()
+    casts, _browser = pychromecast.get_chromecasts()
+    return casts
 
 class ChromecastManager(object):
     def __init__(self, bot):
@@ -62,7 +63,7 @@ class ChromecastManager(object):
         self.bot = bot
 
     def poll(self):
-        for chromecast in active_devices():
+        for chromecast in active_devices(): 
             if chromecast.uuid in self.active_list:
                 continue
             self.register(chromecast)
